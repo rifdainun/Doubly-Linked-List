@@ -1,3 +1,4 @@
+// Online C compiler to run C program online
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,28 +9,28 @@ struct Node {
     struct Node* prev;
 };
 
-// insert node at the front
+// masukkan node di depan
 void insertFront(struct Node** head, int data) {
   // allocate memory for newNode
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
 
-  // assign data to newNode
+  // tetapkan data ke Node baru
     newNode->data = data;
 
-  // make newNode as a head
+  // buat Node baru sebagai kepala
     newNode->next = (*head);
 
-  // assign null to prev
+  // tetapkan null ke sebelumnya
     newNode->prev = NULL;
 
-  // previous of head (now head is the second node) is newNode
+  // sebelumnya dari kepala (sekarang kepala adalah Node kedua) adalah Node baru
     if ((*head) != NULL)
         (*head)->prev = newNode;
 
-  // head points to newNode
+  // kepala menunjuk ke Node baru
         (*head) = newNode;
 }
-// insert a node after a specific node
+// masukkan Node setelah Node tertentu
 void insertAfter(struct Node* prev_node, int data) {
   // check if previous node is null
   if (prev_node == NULL) {
@@ -37,83 +38,83 @@ void insertAfter(struct Node* prev_node, int data) {
     return;
   }
 
-  // allocate memory for newNode
+  // mengalokasikan memori untuk Node baru
   struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
 
-  // assign data to newNode
+  // tetapkan data ke Node baru
   newNode->data = data;
 
-  // set next of newNode to next of prev node
+  // berikutnya atur dari Node baru ke node sebelumnya
   newNode->next = prev_node->next;
 
-  // set next of prev node to newNode
+  // atur berikutnya dari node sebelumnya ke Node baru
   prev_node->next = newNode;
 
-  // set prev of newNode to the previous node
+  // atur sebelumnya dari Node baru ke node sebelumnya
   newNode->prev = prev_node;
 
-  // set prev of newNode's next to newNode
+  // atur sebelumnya dari Node baru di sebelah Node baru
   if (newNode->next != NULL)
     newNode->next->prev = newNode;
 }
 
-// insert a newNode at the end of the list
+// masukkan Node baru di akhir daftar
 void insertEnd(struct Node** head, int data) {
   // allocate memory for node
   struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
 
-  // assign data to newNode
+  // tetapkan data ke Node baru
   newNode->data = data;
 
-  // assign null to next of newNode
+  // tetapkan null ke Node baru berikutnya
   newNode->next = NULL;
 
-  // store the head node temporarily (for later use)
+  // simpan Node kepala sementara (untuk digunakan nanti)
   struct Node* temp = *head;
 
-  // if the linked list is empty, make the newNode as head node
+  // jika daftar link kosong, buat Node baru sebagai Node kepala
   if (*head == NULL) {
     newNode->prev = NULL;
     *head = newNode;
     return;
   }
 
-  // if the linked list is not empty, traverse to the end of the linked list
+  // jika daftar link tidak kosong, lewati ke akhir daftar link
   while (temp->next != NULL)
     temp = temp->next;
 
-  // now, the last node of the linked list is temp
+  // sekarang, Node terakhir dari daftar link adalah temp
 
-  // assign next of the last node (temp) to newNode
+  // tetapkan berikutnya dari node terakhir (temp) ke Node baru
   temp->next = newNode;
 
-  // assign prev of newNode to temp
+  // tetapkan sebelumnya dari Node baru ke temp
   newNode->prev = temp;
 }
 
-// delete a node from the doubly linked list
+// hapus simpul dari daftar link ganda
 void deleteNode(struct Node** head, struct Node* del_node) {
   // if head or del is null, deletion is not possible
   if (*head == NULL || del_node == NULL)
     return;
 
-  // if del_node is the head node, point the head pointer to the next of del_node
+  // jika del_node adalah simpul kepala, arahkan penunjuk kepala ke del_node berikutnya
   if (*head == del_node)
     *head = del_node->next;
 
-  // if del_node is not at the last node, point the prev of node next to del_node to the previous of del_node
+  // jika del_node tidak berada di node terakhir, arahkan node sebelumnya di sebelah del_node ke del_node sebelumnya
   if (del_node->next != NULL)
     del_node->next->prev = del_node->prev;
 
-  // if del_node is not the first node, point the next of the previous node to the next node of del_node
+  // jika del_node bukan node pertama, arahkan node berikutnya dari node sebelumnya ke node del_node berikutnya
   if (del_node->prev != NULL)
     del_node->prev->next = del_node->next;
 
-  // free the memory of del_node
+  // bebaskan memori del_node
   free(del_node);
 }
 
-// print the doubly linked list
+// cetak daftar link ganda
 void displayList(struct Node* node) {
     struct Node* last;
 
@@ -127,7 +128,7 @@ void displayList(struct Node* node) {
 }
 
 int main() {
-  // initialize an empty node
+  // inisialisasi node kosong
     struct Node* head = NULL;
     printf("List : \n");
     insertFront(&head, 1);
