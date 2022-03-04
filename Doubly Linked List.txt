@@ -10,8 +10,9 @@ struct Node {
 };
 
 // masukkan node di depan
-void insertFront(struct Node** head, int data) {
-  // allocate memory for newNode
+void insertFront(struct Node** head, int data)
+{
+  // mengalokasikan memori untuk Node baru
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
 
   // tetapkan data ke Node baru
